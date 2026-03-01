@@ -7,10 +7,9 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'library_system.settings')
 app = Celery('library_system')
 
 app.conf.beat_schedule = {
-    'check_overdue_loans ': {
-        'task': 'app.tasks.check_overdue_loans ',
-        'schedule': crontab(minute='00,00'),
-        'args': (),
+    'check-overdue-loans-daily': {
+        'task': 'library.tasks.check_overdue_loans',
+        'schedule': crontab(hour=0, minute=0),  # runs daily at midnight
     },
 }
 app.config_from_object('django.conf:settings', namespace='CELERY')
