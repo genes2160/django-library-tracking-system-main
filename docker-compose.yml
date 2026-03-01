@@ -15,7 +15,7 @@ services:
   redis:
     image: redis:6
     ports:
-      - "6379:6379"
+      - "6381:6379"
 
   web:
     build: .
@@ -41,5 +41,16 @@ services:
       - web
       - redis
 
+
+  celery-beat:
+      build: .
+      container_name: celery-beat
+      entrypoint: celery
+      command: celery -A library_system.celery beat --loglevel=info
+      links:
+      - celery
+      - redis
+      depends_on:
+      - redis
 volumes:
   postgres_data:
