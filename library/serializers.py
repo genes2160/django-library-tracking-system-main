@@ -44,4 +44,6 @@ class LoanSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Loan
-        fields = ['id', 'book', 'book_id', 'member', 'member_id', 'loan_date', 'return_date', 'is_returned']
+        fields = ['id', 'book', 'book_id', 'member', 'member_id', 
+                  "due_date",       # ✅ add this
+                  'loan_date', 'return_date', 'is_returned']
